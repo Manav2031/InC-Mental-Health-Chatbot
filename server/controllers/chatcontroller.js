@@ -63,7 +63,7 @@ exports.askQuestion = asyncHandler(async (req, res) => {
 
 exports.getChatHistory = (req, res) => {
   try {
-    chat.find()
+    chat.find({ user: req.user.id })
       .then(chats => { res.json(chats) })
   } catch (err) {
     return res.status(400).json(err.message)
