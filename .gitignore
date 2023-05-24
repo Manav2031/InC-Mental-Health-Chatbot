@@ -3,3 +3,4 @@ client/node_modules
 server/node_modules
 server/.env
 emotion_analysis_flask/model/tf_model.h5
+.vscode
