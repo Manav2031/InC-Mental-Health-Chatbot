@@ -6,5 +6,5 @@ exports.callEmotionDetection=(text)=> {
     return parseInt(result.toString().trim());
   }
   
-  // Example usage:
+
   

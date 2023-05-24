@@ -52,7 +52,7 @@ exports.login = asyncHandler(async (req, res) => {
         })
     }else{
         res.status(400)
-        throw new error("Invalid credentials");
+        throw new Error("Invalid credentials");
     }
 })
 
