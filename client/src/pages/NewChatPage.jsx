@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 
 function NewChatPage() {
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const handleSubmit = () => {
         axios.post("http://localhost:5000/chat/new").then(newData => {
@@ -16,7 +15,6 @@ function NewChatPage() {
                 }
             })
         })
-        setIsSubmitted(true);
     }
     return (
         <div className="newchatpage">

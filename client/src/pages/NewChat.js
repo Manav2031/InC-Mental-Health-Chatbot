@@ -12,14 +12,7 @@ function NewChat() {
         id=request.state.key;
         retrieveList();
     },[])
-    useEffect(()=>{
-        
-    },[messages]);
     async function  retrieveList() {
-        // const response=await axios.post("http://localhost:5000/chat/new")
-        // console.log(response.data._id)
-        
-    
         axios.get("http://localhost:5000/chat/"+id)
           .then((res) => {
             const localMessages = [];

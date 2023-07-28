@@ -8,6 +8,7 @@ import NewChat from "./pages/NewChat";
 import Login from "./pages/Login";
 import ChatHistory from "./pages/ChatHistory";
 import Logout from "./pages/Logout";
+import Register from "./pages/register";
 import {initialState, reducer} from "../src/reducer/UseReducer";
 
 export const UserContext = createContext();
@@ -25,6 +26,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/chathistory' element={<ChatHistory />} />
         <Route path='/logout' element={<Logout />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </BrowserRouter>
     </UserContext.Provider>

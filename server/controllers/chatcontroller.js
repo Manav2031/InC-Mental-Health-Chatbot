@@ -27,12 +27,15 @@ exports.askQuestion = asyncHandler(async (req, res) => {
 
     const { question } = req.body;
 
-    const emotionFlag = await callEmotionDetection('I feel very depressed');
-    if (emotionFlag == 1) {
-      console.log("ALRET!!!!")
-    } else {
-      console.log("Don't worry")
-    }
+    // const emotionFlag = await callEmotionDetection('I feel very depressed');
+    // if (emotionFlag == 1) {
+    //   console.log("ALRET!!!!")
+    // } else {
+    //   console.log("Don't worry")
+    // }
+    await axios.get(`http://localhost:8000/${question}`)
+    .then((res)=console.log(res.data))
+    .catch((error)=> {return res.status(400).send(error.message)})
     console.log(req.params.id)
     const cht1 = await chat.findById(req.params.id)
     chatToString(cht1.chat)
