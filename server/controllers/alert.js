@@ -1,25 +1,39 @@
-const tf=require('@tensorflow/tfjs')
+const tf=require('@tensorflow/tfjs-node')
 const path = require('path');
-const fetch = require('node-fetch'); // Import the polyfill
 
-// Monkey-patch TensorFlow.js to use node-fetch
-tf.util.fetch = fetch;
+
+
 
 async function loadModel() {
-    const modelPath = path.join(__dirname, 'server/tfjs_model');
+    const modelPath = path.join(__dirname, '../tfjs_model');
     console.log(modelPath)
     const model = await tf.loadLayersModel(`file://${modelPath}/model.json`);
     return model;
 }
 
-// Call the loadModel function
-loadModel()
-    .then(model => {
-        console.log('Model loaded successfully:', model);
-        // Use the loaded model for inference or other tasks
-    })
-    .catch(error => {
-        console.error('Error loading the model:', error);
-    });
+const loadedModel = loadModel();
 
-  
+// Use the loaded model to make predictions
+async function makePrediction(sentence) {
+  const normalizedSentence = normalized_sentence(sentence);
+  const tokenizedSentence = tokenizer.texts_to_sequences([normalizedSentence]);
+  const paddedSentence = pad_sequences(tokenizedSentence, maxlen=250, truncating='pre');
+  const tensor = tf.tensor(paddedSentence);
+
+  const prediction = loadedModel.predict(tensor);
+  const predictionArray = prediction.arraySync();
+  const resultIndex = predictionArray[0].indexOf(Math.max(...predictionArray[0]));
+  const classNames = ['depression', 'non-suicide', 'suicide'];
+  const resultClass = classNames[resultIndex];
+
+  console.log(`Predicted class: ${resultClass}`);
+}
+
+// Call the function to make predictions
+makePrediction("i want to kill myself");
+    
+    
+    
+    
+    
+    
