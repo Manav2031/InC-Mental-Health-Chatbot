@@ -19,6 +19,12 @@ export const SidebarData = [
         icon: <MdIcons.MdLogin />,
         cName: 'nav-text'
     },
+    {
+        title:'Register',
+        path: '/register',
+        icon: <MdIcons.MdLogin />,
+        cName: 'nav-text'
+    }
     
 ]
 

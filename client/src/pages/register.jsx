@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { register,reset } from "../feature/login/loginSlice";
+import {toast} from "react-toastify"
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Register() {
 
@@ -10,6 +16,26 @@ export default function Register() {
   })
   const { name, email, password, password2 } = formData;
 
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -19,9 +45,16 @@ export default function Register() {
 
   function handleSubmit(e){
     if(password!=password2){
-      
+      toast.error('passwords do not match');
     }
     console.log(formData);
+    const userData = {
+      name,
+      email,
+      password,
+    }
+
+    dispatch(register(userData))
     e.preventDefault();
   }
 

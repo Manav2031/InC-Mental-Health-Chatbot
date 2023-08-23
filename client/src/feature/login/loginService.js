@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const registerEndpoint='user/register';
-const loginEndpoint='user/login';
+const registerEndpoint='http://localhost:5000/user/register';
+const loginEndpoint='http://localhost:5000/user/login';
 
 const authRegister=async(userData)=>{
     const response= await axios.post(registerEndpoint,userData);
@@ -24,7 +24,10 @@ const logout = () => {
     localStorage.removeItem('user')
   }
 
-export default authService={
+const authService={
     authRegister,
-    authLogin
-} 
+    authLogin,
+    logout
+}
+
+export default authLogin;

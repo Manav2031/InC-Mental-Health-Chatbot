@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const express = require('express')
 const bodyParser = require('body-parser')
 const axios = require('axios')
-const { callEmotionDetection } = require('./alert')
+// const { callEmotionDetection } = require('./alert')
 const chat = require('../model/chatModel')
 const asyncHandler=require("express-async-handler")
 
